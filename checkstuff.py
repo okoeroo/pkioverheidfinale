@@ -96,7 +96,7 @@ def processor_fqdn2ip(fqdnipwhois: FqdnIpWhois) -> FqdnIpWhois:
     return fqdnipwhois
 
 def processor_convert_list_of_fqdnipwhois2csv(fqdns_with_dns: list[FqdnIpWhois]) -> None:
-    filename = "/tmp/output.csv"
+    filename = "output.csv"
     with open(filename, 'w') as csvfile:
         fieldnames = ['fqdn', 'ip', 'prefix',
                         'asn', 'asn_description', 
@@ -124,8 +124,7 @@ def processor_convert_list_of_fqdnipwhois2csv(fqdns_with_dns: list[FqdnIpWhois])
 
 ### Main
 if __name__ == '__main__':
-#    filename = "/tmp/pkishort.txt"
-    filename = "/tmp/pkioverheid.txt"
+    filename = "pkioverheid.txt"
 
     with open(filename, "r") as f:
         fqdns = [FqdnIpWhois(fqdn.lower()) for fqdn in f.read().splitlines() if validators.domain(fqdn)]
