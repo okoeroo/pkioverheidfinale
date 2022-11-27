@@ -16,9 +16,9 @@ if __name__ == '__main__':
         fqdns = [FqdnIpWhois(fqdn.lower()) for fqdn in f.read().splitlines() if validators.domain(fqdn)]
 
 
-    with Pool(processes=256) as p:
-        fqdns_with_dns = p.map_async(processor_fqdn2ip, fqdns).get()
-#    fqdns_with_dns = [processor_fqdn2ip(fqdn) for fqdn in fqdns]
+#    with Pool(processes=256) as p:
+#        fqdns_with_dns = p.map_async(processor_fqdn2ip, fqdns).get()
+    fqdns_with_dns = [processor_fqdn2ip(fqdn) for fqdn in fqdns]
 
 
     fqdns_with_cert = [processor_probe_certificates(fqdn) for fqdn in fqdns_with_dns]
