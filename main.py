@@ -31,5 +31,5 @@ if __name__ == '__main__':
 
     fqdns_with_cert = [processor_probe_certificates(fqdn) for fqdn in fqdns_with_dns]
 
-    processor_convert_list_of_fqdnipwhois2csv(outputfilename, fqdns_with_cert)
+    processor_convert_list_of_fqdnipwhois2csv(args.output_filename, fqdns_with_cert)
 
