@@ -5,12 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "Python: main.py",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "main.py",
             "console": "integratedTerminal",
             "justMyCode": true
+            "args": ["-v", "--input-filename", "samples/pkishort.txt", "--output-filename", "samples/short.txt"]
         }
     ]
 }
