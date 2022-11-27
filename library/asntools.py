@@ -1,12 +1,15 @@
 import ipaddress
 from library.models import ASN, ASNDescription
-from library.dnstools import dns_query
+from library.dnstools import dns_query, DNSERRORS
 
 
 def fetch_asndescription(asn: int) -> ASNDescription:
     fqdn = "AS" + str(asn) + ".asn.cymru.com"
 
-    answers = dns_query(fqdn, "TXT")
+    status, answers = dns_query(fqdn, "TXT")
+    if status != DNSERRORS.NOERROR:
+        return None
+
     rr_data = str(answers[0]).replace('"','')
 
     asn = int(rr_data.split(" | ")[0])
@@ -26,7 +29,10 @@ def fetch_ip2asn(ip: str) -> ASN:
 
     fqdn = ip_obj.reverse_pointer.split(".in-addr.arpa")[0] + ".origin.asn.cymru.com"
 
-    answers = dns_query(fqdn, "TXT")
+    status, answers = dns_query(fqdn, "TXT")
+    if status != DNSERRORS.NOERROR:
+        return None
+
     rr_data = str(answers[0]).replace('"','')
 
     asn = int(rr_data.split(" | ")[0])

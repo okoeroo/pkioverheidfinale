@@ -20,6 +20,7 @@ if __name__ == '__main__':
         fqdns_with_dns = p.map_async(processor_fqdn2ip, fqdns).get()
 #    fqdns_with_dns = [processor_fqdn2ip(fqdn) for fqdn in fqdns]
 
+
     fqdns_with_cert = [processor_probe_certificates(fqdn) for fqdn in fqdns_with_dns]
 
     processor_convert_list_of_fqdnipwhois2csv(outputfilename, fqdns_with_cert)
