@@ -1,6 +1,8 @@
+import sys
 from multiprocessing import Pool
 import validators
 
+from library.cli import sanity_checks, argparsing
 from library.models import FqdnIpWhois
 from library.fqdnipwhois import processor_probe_certificates, processor_fqdn2ip
 from library.csvtools import processor_convert_list_of_fqdnipwhois2csv
@@ -12,7 +14,13 @@ if __name__ == '__main__':
     filename = "pkishort.txt"
     outputfilename = "expanded-output.csv"
 
-    with open(filename, "r") as f:
+    # Parse arguments
+    args = argparsing()
+    if not sanity_checks(args):
+        sys.exit(1)
+
+    # Open and parse input
+    with open(args.input_filename, "r") as f:
         fqdns = [FqdnIpWhois(fqdn.lower()) for fqdn in f.read().splitlines() if validators.domain(fqdn)]
 
 
