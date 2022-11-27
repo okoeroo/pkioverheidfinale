@@ -41,13 +41,22 @@ def cert_start_probe(host, port=443, timeout=5):
     # Create an x509.Certificate instance
     cert_x509 = x509.load_pem_x509_certificate(bytes(cert_pem, 'utf-8'))
 
-    print(cert_x509.not_valid_after.isoformat())
-    print(cert_x509.not_valid_before.isoformat())
+    # Technically, multiple Common Names could appear. Concattenating when applicable.
+    common_names = ",".join([c.value for c in cert_x509.subject.get_attributes_for_oid(x509.oid.NameOID.COMMON_NAME)])
+
+    sans = cert_x509.extensions.get_extension_for_class(x509.SubjectAlternativeName)
+    san_dns_names = ",".join([san for san in sans.value.get_values_for_type(x509.DNSName)])
+    print(san_dns_names)
+
 
     # Simplified for processing
     s_cert = SimplifiedCertificate(cert_x509.subject.rfc4514_string(),
                                     cert_x509.issuer.rfc4514_string(),
                                     cert_x509.serial_number,
+                                    cert_x509.not_valid_before.isoformat(),
+                                    cert_x509.not_valid_after.isoformat(),
+                                    common_names,
+                                    san_dns_names,
                                     cert_pem,
                                     cert_x509)
     return s_cert

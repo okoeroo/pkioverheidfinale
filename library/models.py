@@ -7,6 +7,10 @@ class SimplifiedCertificate:
     subject_dn: str
     issuer_dn: str
     serial_nr: str
+    not_valid_before: str
+    not_valid_after: str
+    common_names: str
+    san_dns_names: str
     pem: str   
     certificate: x509.Certificate 
 

@@ -20,6 +20,10 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
     if f.cert is not None:
         row['subject_dn'] = f.cert.subject_dn
         row['issuer_dn'] = f.cert.issuer_dn
+        row['not_valid_before'] = f.cert.not_valid_before
+        row['not_valid_after'] = f.cert.not_valid_after
+        row['common_names'] = f.cert.common_names
+        row['san_dns_names'] = f.cert.san_dns_names
 
     return row
 
@@ -29,7 +33,10 @@ def processor_convert_list_of_fqdnipwhois2csv(outputfilename: str, fqdns_with_dn
                         'asn', 'asn_description', 
                         'country', 'registrar',
                         'last_update_asn', 'last_update_asn_desc',
-                        'subject_dn', 'issuer_dn']
+                        'subject_dn', 'issuer_dn',
+                        'common_names',
+                        'san_dns_names',
+                        'not_valid_before', 'not_valid_after']
     
         csvwriter = csv.DictWriter(csvfile, fieldnames=fieldnames)
         csvwriter.writeheader()
