@@ -1,3 +1,4 @@
+import sys
 import dns.resolver
 from enum import Enum
 
