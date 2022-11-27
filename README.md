@@ -20,6 +20,32 @@ The output contains the:
 - Not valid before time of the certificate.
 - Not valid after time of the certificate
 
+# Commandline options
+```bash
+% ./main.py --help
+usage: cli.py [-h] [-v] [--parallel] [-i INPUT_FILENAME] [-o OUTPUT_FILENAME]
+
+options:
+  -h, --help            show this help message and exit
+  -v, --verbose         Verbose mode. Default is off
+  --parallel            Use parallel approachauthentication key.
+  -i INPUT_FILENAME, --input-filename INPUT_FILENAME
+                        Input filename.
+  -o OUTPUT_FILENAME, --output-filename OUTPUT_FILENAME
+                        Output filename.
+```
+
+# Example run
+```bash
+% ./main.py --input-filename samples/pkishort.txt --output-filename samples/short.csv -v
+Input filename: samples/pkishort.txt
+Output filename: samples/short.csv
+```
+
+# Sample input and output
+[Input file: pkishort.txt](samples/pkishort.txt)
+
+[Output file: short.csv](samples/short.csv)
 
 # Acknowledgements:
 The example "pkioverheid.txt" file was created by Hugo Leisink.
