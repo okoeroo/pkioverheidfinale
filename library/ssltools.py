@@ -44,10 +44,9 @@ def cert_start_probe(host, port=443, timeout=5):
     # Technically, multiple Common Names could appear. Concattenating when applicable.
     common_names = ",".join([c.value for c in cert_x509.subject.get_attributes_for_oid(x509.oid.NameOID.COMMON_NAME)])
 
+    # Extract Subject Alt Names from the certificate, concattenate the output
     sans = cert_x509.extensions.get_extension_for_class(x509.SubjectAlternativeName)
     san_dns_names = ",".join([san for san in sans.value.get_values_for_type(x509.DNSName)])
-    print(san_dns_names)
-
 
     # Simplified for processing
     s_cert = SimplifiedCertificate(cert_x509.subject.rfc4514_string(),
