@@ -35,6 +35,15 @@ options:
                         Output filename.
 ```
 
+# Dependencies
+```
+pip3 install validators
+pip3 install dnspython
+pip3 install cryptography
+```
+Or use the requirements.txt file.
+
+
 # Example run
 ```bash
 % ./main.py --input-filename samples/pkishort.txt --output-filename samples/short.csv -v
