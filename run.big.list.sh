@@ -1,4 +1,8 @@
-./main.py -i samples/pkioverheid.txt -o samples/pkioverheid.expanded-output.csv
+./main.py \
+    -i samples/pkioverheid.txt \
+    -o samples/pkioverheid.expanded-output.csv \
+    --dns 1.1.1.1,9.9.9.9
+
 
 if [ "$?" != 0 ]; then
     echo "failed"
