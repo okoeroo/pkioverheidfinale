@@ -44,6 +44,11 @@ def argparsing():
                         help="Output filename.",
                         default=None,
                         type=str)
+    parser.add_argument("-d", "--dns",
+                        dest='dns_servers',
+                        help="DNS Servers, could be multiple split by a comma.",
+                        default=None,
+                        type=str)
 
     args = parser.parse_args()
     if args is None:

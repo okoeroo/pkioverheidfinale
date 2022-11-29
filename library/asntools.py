@@ -3,10 +3,12 @@ from library.models import ASN, ASNDescription
 from library.dnstools import dns_query, DNSERRORS
 
 
-def fetch_asndescription(asn: int) -> ASNDescription:
+def fetch_asndescription(asn: int, nameservers: list[str] = None) -> ASNDescription:
     fqdn = "AS" + str(asn) + ".asn.cymru.com"
 
-    status, answers = dns_query(fqdn, "TXT")
+    status, answers = dns_query(fqdn,
+                                "TXT",
+                                nameservers)
     if status != DNSERRORS.NOERROR:
         return None
 
@@ -24,12 +26,15 @@ def fetch_asndescription(asn: int) -> ASNDescription:
     return asn_desc
 
 
-def fetch_ip2asn(ip: str) -> ASN:
+def fetch_ip2asn(ip: str,
+                 nameservers: list[str] = None) -> ASN:
     ip_obj = ipaddress.ip_address(ip)
 
     fqdn = ip_obj.reverse_pointer.split(".in-addr.arpa")[0] + ".origin.asn.cymru.com"
 
-    status, answers = dns_query(fqdn, "TXT")
+    status, answers = dns_query(fqdn,
+                                "TXT", 
+                                nameservers)
     if status != DNSERRORS.NOERROR:
         return None
 
@@ -42,7 +47,7 @@ def fetch_ip2asn(ip: str) -> ASN:
     last_update = rr_data.split(" | ")[4]
 
     # Create ASN Description object
-    asn_desc = fetch_asndescription(asn)
+    asn_desc = fetch_asndescription(asn, nameservers)
 
     # Create ASN object
     asn_info = ASN(asn, prefix, country, registrar, last_update, asn_desc)

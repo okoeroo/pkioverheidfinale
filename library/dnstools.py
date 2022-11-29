@@ -15,7 +15,7 @@ def dns_query(fqdn: str, r_type: str,
     try:
         resolver = dns.resolver.Resolver()
         if nameservers is not None:
-            resolver.nameservers=nameservers
+            resolver.nameservers=nameservers.split(",")
 
         answers = resolver.query(fqdn, r_type)
 
