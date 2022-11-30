@@ -36,14 +36,14 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
 
 def processor_convert_list_of_fqdnipwhois2csv(outputfilename: str, fqdns_with_dns: list[FqdnIpWhois]) -> None:
     with open(outputfilename, 'w') as csvfile:
-        fieldnames = ['fqdn', 'ip', 'prefix',
+        fieldnames = ['organisation', 'fqdn', 'ip', 'san_dns_names', 
+                        'not_valid_before', 'not_valid_after',
+                        'prefix',
                         'asn', 'asn_description', 
                         'country', 'registrar',
                         'last_update_asn', 'last_update_asn_desc',
                         'subject_dn', 'issuer_dn',
                         'common_names',
-                        'san_dns_names',
-                        'not_valid_before', 'not_valid_after',
                         'organisation']
     
         csvwriter = csv.DictWriter(csvfile, fieldnames=fieldnames)
