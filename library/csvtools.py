@@ -3,12 +3,14 @@ import csv
 import operator
 from library.models import FqdnIpWhois
 
+HACKCODE = 'zzzlazyhackzzz'
+
 
 def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
     row = {}
 
     # Initializer, for reasons of the sorted() feat later.
-    row['organisation'] = 'not specified'
+    row['organisation'] = HACKCODE
     row['not_valid_after'] = ''
     row['san_dns_names'] = ''
 
@@ -60,6 +62,10 @@ def processor_convert_list_of_fqdnipwhois2csv(outputfilename: str, fqdns_with_dn
         rows_to_write.sort(key=operator.itemgetter('san_dns_names'))
         rows_to_write.sort(key=operator.itemgetter('not_valid_after'))
         rows_to_write.sort(key=operator.itemgetter('organisation'))
+
+        for r in rows_to_write:
+            if r['organisation'] == HACKCODE:
+                r['organisation'] = ''
 
         for r in rows_to_write:
             csvwriter.writerow(r)
