@@ -1,10 +1,18 @@
 import re
 import csv
+import operator
 from library.models import FqdnIpWhois
 
 
 def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
     row = {}
+
+    # Initializer, for reasons of the sorted() feat later.
+    row['organisation'] = 'not specified'
+    row['not_valid_after'] = ''
+    row['san_dns_names'] = ''
+
+    
     row['fqdn'] = f.fqdn
     if f.ip is None:
         row['ip'] = 'FAILURE'
@@ -30,7 +38,6 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
         result = re.search('O=([\w ]+),', f.cert.subject_dn)
         if result is not None:
             row['organisation'] = result.group(1)
-            print(result.group(1))
 
     return row
 
@@ -43,11 +50,16 @@ def processor_convert_list_of_fqdnipwhois2csv(outputfilename: str, fqdns_with_dn
                         'country', 'registrar',
                         'last_update_asn', 'last_update_asn_desc',
                         'subject_dn', 'issuer_dn',
-                        'common_names',
-                        'organisation']
+                        'common_names']
     
         csvwriter = csv.DictWriter(csvfile, fieldnames=fieldnames)
         csvwriter.writeheader()
 
-        for f in fqdns_with_dns:
-            csvwriter.writerow(generate_csv_row_dict(f))
+        rows_to_write = [generate_csv_row_dict(f) for f in fqdns_with_dns]
+
+        rows_to_write.sort(key=operator.itemgetter('san_dns_names'))
+        rows_to_write.sort(key=operator.itemgetter('not_valid_after'))
+        rows_to_write.sort(key=operator.itemgetter('organisation'))
+
+        for r in rows_to_write:
+            csvwriter.writerow(r)
