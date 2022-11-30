@@ -5,11 +5,11 @@ from library.models import SimplifiedCertificate
 
 
 # Connect to host, get X.509 in PEM format
-def get_certificate(host, port=443, timeout=5):
+def get_certificate(fqdn, port=443, timeout=5):
     cafile = "cacert.pem"
     
     try:
-        conn = ssl.create_connection((host, port), timeout=timeout)
+        conn = ssl.create_connection((fqdn, port), timeout=timeout)
         context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
         
         # Dangerous settings!
@@ -17,14 +17,14 @@ def get_certificate(host, port=443, timeout=5):
         context.verify_mode = ssl.CERT_NONE
 #        context.load_verify_locations(cafile=cafile)
 
-        sock = context.wrap_socket(conn, server_hostname=host)
+        sock = context.wrap_socket(conn, server_hostname=fqdn)
         cert_der = sock.getpeercert(True)
         cert_pem = ssl.DER_cert_to_PEM_cert(cert_der)
 
         # Note: Not matching hostname on purpose
 
     except Exception as e:
-        print(e)
+        print(f"TLS error for {fqdn}:{port} and timeout {timeout}: {e}", file=sys.stderr)
         return None
 
     # cert_pem = ssl.get_server_certificate((host, port))
