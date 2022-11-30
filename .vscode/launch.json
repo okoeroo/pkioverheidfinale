@@ -13,7 +13,8 @@
             "justMyCode": true
             "args": ["-v", 
                         "--input-filename", "samples/pkishort.txt", 
-                        "--output-filename", "samples/short.csv"]
+                        "--output-filename", "samples/short.csv",
+                        "--dns", "8.8.8.8"]
         }
     ]
 }
