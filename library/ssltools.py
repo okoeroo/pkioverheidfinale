@@ -16,7 +16,7 @@ def get_certificate(fqdn, port=443, timeout=5):
         # Dangerous settings!
         context.check_hostname = False
         context.verify_mode = ssl.CERT_NONE
-#        context.load_verify_locations(cafile=cafile)
+        # context.load_verify_locations(cafile=cafile)
 
         sock = context.wrap_socket(conn, server_hostname=fqdn)
         cert_der = sock.getpeercert(True)
@@ -28,7 +28,6 @@ def get_certificate(fqdn, port=443, timeout=5):
         print(f"TLS error for {fqdn}:{port} and timeout {timeout}: {e}", file=sys.stderr)
         return None
 
-    # cert_pem = ssl.get_server_certificate((host, port))
     return cert_pem
 
 
