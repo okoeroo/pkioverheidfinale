@@ -37,7 +37,7 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
         row['common_names'] = f.cert.common_names
         row['san_dns_names'] = f.cert.san_dns_names
 
-        result = re.search('O=([\w ]+),', f.cert.subject_dn)
+        result = re.search('O=([\w\-_ \.\(\)]+),', f.cert.subject_dn)
         if result is not None:
             row['organisation'] = result.group(1)
 
