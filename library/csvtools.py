@@ -20,7 +20,7 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
         row['ip'] = 'FAILURE'
     else:
         row['ip'] = f.ip
-        row['prefix'] = f.asn.prefix
+        # row['prefix'] = f.asn.prefix
         row['asn'] = f.asn.asn
         row['asn_description'] = f.asn.asn_description.description 
         row['country'] = f.asn.country 
@@ -37,7 +37,7 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
         row['common_names'] = f.cert.common_names
         row['san_dns_names'] = f.cert.san_dns_names
 
-        result = re.search('O=([\w\-_ \.\(\)]+),', f.cert.subject_dn)
+        result = re.search('O=([\w\-_ \.\(\)&\\,]+),[a-zA-Z]+=', f.cert.subject_dn)
         if result is not None:
             row['organisation'] = result.group(1)
 
@@ -47,7 +47,7 @@ def processor_convert_list_of_fqdnipwhois2csv(outputfilename: str, fqdns_with_dn
     with open(outputfilename, 'w') as csvfile:
         fieldnames = ['organisation', 'fqdn', 'ip', 'san_dns_names', 
                         'not_valid_before', 'not_valid_after',
-                        'prefix',
+                        # 'prefix',
                         'asn', 'asn_description', 
                         'country', 'registrar',
                         'last_update_asn', 'last_update_asn_desc',
