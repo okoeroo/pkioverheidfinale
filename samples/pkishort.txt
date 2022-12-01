@@ -3,6 +3,5 @@ Websites met nog een PKIoverheid certificaat (23-11-2022)
 
 aaa.wigo4it.nl
 aanbieders.lerarenportfolio.nl
-aanvraag-beheer.ciz.nl
 activesync.hetcak.nl
-tvs.tetra.nl
+productie.coronamelder-dist.nl
