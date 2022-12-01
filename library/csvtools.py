@@ -10,7 +10,7 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
     row = {}
 
     # Initializer, for reasons of the sorted() feat later.
-    row['organisation'] = HACKCODE
+    row['organisation'] = ''
     row['not_valid_after'] = ''
     row['san_dns_names'] = ''
 
@@ -37,7 +37,7 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
         row['common_names'] = f.cert.common_names
         row['san_dns_names'] = f.cert.san_dns_names
 
-        result = re.search('O=([\w\-_ \.\(\)&\\,]+),[a-zA-Z]+=', f.cert.subject_dn)
+        result = re.search('O=([\w\-_ \.\(\)&,\\\\]+),[a-zA-Z]+=', f.cert.subject_dn)
         if result is not None:
             row['organisation'] = result.group(1)
 
@@ -62,10 +62,6 @@ def processor_convert_list_of_fqdnipwhois2csv(outputfilename: str, fqdns_with_dn
         rows_to_write.sort(key=operator.itemgetter('san_dns_names'))
         rows_to_write.sort(key=operator.itemgetter('not_valid_after'))
         rows_to_write.sort(key=operator.itemgetter('organisation'))
-
-        for r in rows_to_write:
-            if r['organisation'] == HACKCODE:
-                r['organisation'] = ''
 
         for r in rows_to_write:
             csvwriter.writerow(r)
