@@ -1,4 +1,5 @@
 ./main.py \
+    --verbose \
     -i samples/pkioverheid.txt \
     -o samples/pkioverheid.expanded-output.csv \
     --dns 1.1.1.1,9.9.9.9
