@@ -6,9 +6,15 @@ from library.models import SimplifiedCertificate
 
 
 # Connect to host, get X.509 in PEM format
-def get_certificate(fqdn, port=443, timeout=5):
+def get_certificate(fqdn: str, 
+                    port: int = 443,
+                    timeout: int = 5,
+                    verbose: bool = False):
     cafile = "cacert.pem"
     
+    if verbose:
+        print(f"Debug (get_certificate): {fqdn}:{port} - timeout:{timeout} - probing...", file=sys.stderr)
+
     try:
         conn = ssl.create_connection((fqdn, port), timeout=timeout)
         context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
@@ -28,12 +34,16 @@ def get_certificate(fqdn, port=443, timeout=5):
         print(f"TLS error for {fqdn}:{port} and timeout {timeout}: {e}", file=sys.stderr)
         return None
 
+    print(f"Debug (get_certificate): {fqdn}:{port} - timeout:{timeout} - success", file=sys.stderr)
     return cert_pem
 
 
-def cert_start_probe(host, port=443, timeout=5):
+def cert_start_probe(fqdn: str,
+                     port: int = 443,
+                     timeout: int = 5,
+                     verbose: bool = False):
     # Get certificate from endpoint
-    cert_pem = get_certificate(host, port, timeout)
+    cert_pem = get_certificate(fqdn, port, timeout, verbose)
     if cert_pem is None:
         print(f"Connection failed, no certificate to analyse")
         return None
@@ -41,12 +51,20 @@ def cert_start_probe(host, port=443, timeout=5):
     # Create an x509.Certificate instance
     cert_x509 = x509.load_pem_x509_certificate(bytes(cert_pem, 'utf-8'))
 
-    # Technically, multiple Common Names could appear. Concattenating when applicable.
-    common_names = ",".join([c.value for c in cert_x509.subject.get_attributes_for_oid(x509.oid.NameOID.COMMON_NAME)])
+    try:
+        # Technically, multiple Common Names could appear. Concattenating when applicable.
+        common_names = ",".join([c.value for c in cert_x509.subject.get_attributes_for_oid(x509.oid.NameOID.COMMON_NAME)])
+    except Exception as e:
+        print(f"Warning {fqdn}:{port}: no Common Name found. Exception: {e}")
+        common_names = ''
 
-    # Extract Subject Alt Names from the certificate, concattenate the output
-    sans = cert_x509.extensions.get_extension_for_class(x509.SubjectAlternativeName)
-    san_dns_names = ",".join([san for san in sans.value.get_values_for_type(x509.DNSName)])
+    try:
+        # Extract Subject Alt Names from the certificate, concattenate the output
+        sans = cert_x509.extensions.get_extension_for_class(x509.SubjectAlternativeName)
+        san_dns_names = ",".join([san for san in sans.value.get_values_for_type(x509.DNSName)])
+    except Exception as e:
+        print(f"Warning {fqdn}:{port}: no Subject Alt Names extension. Exception: {e}")
+        san_dns_names = ''
 
     # Simplified for processing
     s_cert = SimplifiedCertificate(cert_x509.subject.rfc4514_string(),

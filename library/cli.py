@@ -49,6 +49,16 @@ def argparsing():
                         help="DNS Servers, could be multiple split by a comma.",
                         default=None,
                         type=str)
+    parser.add_argument("-t", "--timeout",
+                        dest='timeout',
+                        help="Timeout value, default is 5 seconds.",
+                        default=5,
+                        type=int)
+    parser.add_argument("-p", "--port",
+                        dest='port',
+                        help="Portnumber to probe for a certificate, default is 443.",
+                        default=443,
+                        type=int)
 
     args = parser.parse_args()
     if args is None:

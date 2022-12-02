@@ -21,10 +21,15 @@ if __name__ == '__main__':
         fqdns = [FqdnIpWhois(fqdn.lower()) for fqdn in f.read().splitlines() if validators.domain(fqdn)]
 
     # DNS query the list, and add to the object list
-    fqdns_with_dns = [processor_fqdn2ip(fqdn, args.dns_servers, args.verbose) for fqdn in fqdns]
+    fqdns_with_dns = [processor_fqdn2ip(fqdn,
+                                        args.dns_servers, 
+                                        args.verbose) for fqdn in fqdns]
 
     # Probe for certificates and expand the object list
-    fqdns_with_cert = [processor_probe_certificates(fqdn) for fqdn in fqdns_with_dns]
+    fqdns_with_cert = [processor_probe_certificates(fqdn,
+                                                    args.port, 
+                                                    args.timeout, 
+                                                    args.verbose) for fqdn in fqdns_with_dns]
 
     # Write output to CSV file
     processor_convert_list_of_fqdnipwhois2csv(args.output_filename, fqdns_with_cert)

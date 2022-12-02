@@ -31,7 +31,10 @@ def processor_fqdn2ip(fqdnipwhois: FqdnIpWhois,
     return fqdnipwhois
 
 
-def processor_probe_certificates(fqdnipwhois: FqdnIpWhois) -> FqdnIpWhois:
-    fqdnipwhois.cert = cert_start_probe(fqdnipwhois.fqdn)
+def processor_probe_certificates(fqdnipwhois: FqdnIpWhois,
+                                 port: int = 443,
+                                 timeout: int = 5,
+                                 verbose: bool = False) -> FqdnIpWhois:
+    fqdnipwhois.cert = cert_start_probe(fqdnipwhois.fqdn, port, timeout, verbose)
     return fqdnipwhois
     
