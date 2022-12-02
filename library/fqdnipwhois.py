@@ -5,16 +5,27 @@ from library.ssltools import cert_start_probe
 
 
 def processor_fqdn2ip(fqdnipwhois: FqdnIpWhois,
-                        nameservers: list[str] = None) -> FqdnIpWhois:
+                        nameservers: list[str] = None,
+                        verbose: bool = False) -> FqdnIpWhois:
     status, answers = dns_query(fqdnipwhois.fqdn,
                                 'A', 
-                                nameservers)
+                                nameservers,
+                                verbose)
     if status != DNSERRORS.NOERROR:
         return fqdnipwhois
 
-    fqdnipwhois.ip = str(answers[0])
+    # Get list of IP addresses, let the output be sorted
+    ip_list = sorted([str(rr) for rr in answers])
 
-    asn_info = fetch_ip2asn(fqdnipwhois.ip, nameservers)
+    # Short cut, only scan and work with the first hit
+    fqdnipwhois.ip = ip_list[0]
+
+    # Record the IP list for later use.
+    fqdnipwhois.ip_list = ip_list
+
+    asn_info = fetch_ip2asn(fqdnipwhois.ip,
+                            nameservers,
+                            verbose)
     fqdnipwhois.asn = asn_info
 
     return fqdnipwhois

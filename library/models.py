@@ -35,5 +35,6 @@ class ASN:
 class FqdnIpWhois:
     fqdn: str
     ip: str | None = None
+    ip_list: list[str] | None = None
     asn: ASN | None = None
     cert: SimplifiedCertificate | None = None
