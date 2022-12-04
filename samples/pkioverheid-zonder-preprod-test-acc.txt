@@ -38,9 +38,7 @@ archibus-int-a.kpn.org
 archibus-int-p.kpn.org
 archisarchief.cultureelerfgoed.nl
 archis.cultureelerfgoed.nl
-a-rss.persberichten.rijksoverheid.nl
 aselect.inspectieruimte.nl
-a-subscribe.platformrijksoverheid.nl
 auth.acm.nl
 auth.centraalregistertechniek.nl
 auth.hinq.nl
