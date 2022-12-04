@@ -1,6 +1,7 @@
+
 ./main.py \
     --verbose \
-    -i samples/pkioverheid.txt \
+    -i samples/pkioverheid-zonder-preprod-test-acc.txt \
     -o samples/pkioverheid.expanded-output.csv \
     --dns 1.1.1.1,9.9.9.9
 
@@ -12,9 +13,10 @@ fi
 
 
 cat samples/pkioverheid.expanded-output.csv | head -n 1 > samples/pkioverheid.IN_scope.expanded-output.csv
-cat samples/pkioverheid.expanded-output.csv | grep -i "pkioverheid" | grep -vi "private" >> samples/pkioverheid.IN_scope.expanded-output.csv
+cat samples/pkioverheid.expanded-output.csv | \
+        grep -i "pkioverheid" | \
+        grep -vi "private" \
+        >> samples/pkioverheid.IN_scope.expanded-output.csv
 
-cat samples/pkioverheid.expanded-output.csv | head -n 1 > samples/pkioverheid.OUT_of_scope.expanded-output.csv
-cat samples/pkioverheid.expanded-output.csv | grep -v -i "pkioverheid" | grep -vi "private" >> samples/pkioverheid.OUT_of_scope.expanded-output.csv
 
 echo "done"
