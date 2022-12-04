@@ -1,9 +1,9 @@
-organisation,fqdn,is_expired,not_valid_before,not_valid_after,san_dns_names,subject_dn,issuer_dn,common_names,asn,asn_description,last_update_asn,last_update_asn_desc,country,registrar
-,aaa.wigo4it.nl,No,2022-11-25T12:13:27,2023-02-23T12:13:26,aaa.wigo4it.nl,CN=aaa.wigo4it.nl,"CN=R3,O=Let's Encrypt,C=US",aaa.wigo4it.nl,33915,"TNF-AS, NL",2001-07-25,2004-09-06,NL,ripencc
+organisation,fqdn,is_expired,not_valid_before,not_valid_after,san_dns_names,subject_dn,issuer_dn,common_names,ip,prefix,asn,asn_description,last_update_asn,last_update_asn_desc,country,registrar
+,aaa.wigo4it.nl,No,2022-11-25T12:13:27,2023-02-23T12:13:26,aaa.wigo4it.nl,CN=aaa.wigo4it.nl,"CN=R3,O=Let's Encrypt,C=US",aaa.wigo4it.nl,80.113.84.147,80.113.0.0/17,33915,"TNF-AS, NL",2001-07-25,2004-09-06,NL,ripencc
 CAK,activesync.hetcak.nl,No,2022-11-08T11:01:58,2023-11-08T10:56:00,"activesync.hetcak.nl,
 webmail.hetcak.nl,
-autodiscover.hetcak.nl","CN=activesync.hetcak.nl,O=CAK,L='s-Gravenhage,ST=Zuid-Holland,C=NL","CN=QuoVadis Europe SSL CA G2,O=QuoVadis Trustlink B.V.,C=NL",activesync.hetcak.nl,203740,"CAK, NL",2015-11-06,2015-11-10,NL,ripencc
+autodiscover.hetcak.nl","CN=activesync.hetcak.nl,O=CAK,L='s-Gravenhage,ST=Zuid-Holland,C=NL","CN=QuoVadis Europe SSL CA G2,O=QuoVadis Trustlink B.V.,C=NL",activesync.hetcak.nl,185.125.41.7,185.125.40.0/22,203740,"CAK, NL",2015-11-06,2015-11-10,NL,ripencc
 CIBG,aanbieders.lerarenportfolio.nl,Yes,2021-11-30T14:40:04,2022-12-04T14:40:04,"mijn.lerarenportfolio.nl,
 aanbieders.lerarenportfolio.nl,
-beheer.lerarenportfolio.nl","CN=mijn.lerarenportfolio.nl,2.5.4.5=00000002006756402002,O=CIBG,L=Den Haag,C=NL","CN=KPN PKIoverheid Server CA 2020,O=KPN B.V.,C=NL",mijn.lerarenportfolio.nl,15879,"KPN-INTERNEDSERVICES KPN Internedservices, NL",2003-09-18,2000-10-26,NL,ripencc
-"Ministerie van Volksgezondheid\, Welzijn en Sport",productie.coronamelder-dist.nl,Yes,2022-08-23T11:20:02,2022-12-04T11:20:02,productie.coronamelder-dist.nl,"CN=productie.coronamelder-dist.nl,O=Ministerie van Volksgezondheid\, Welzijn en Sport,L='s-Gravenhage,C=NL","CN=KPN PKIoverheid Server CA 2020,O=KPN B.V.,C=NL",productie.coronamelder-dist.nl,41887,"PROLOCATION Prolocation, NL",2000-06-22,2006-11-09,NL,ripencc
+beheer.lerarenportfolio.nl","CN=mijn.lerarenportfolio.nl,2.5.4.5=00000002006756402002,O=CIBG,L=Den Haag,C=NL","CN=KPN PKIoverheid Server CA 2020,O=KPN B.V.,C=NL",mijn.lerarenportfolio.nl,82.201.78.145,82.201.0.0/17,15879,"KPN-INTERNEDSERVICES KPN Internedservices, NL",2003-09-18,2000-10-26,NL,ripencc
+"Ministerie van Volksgezondheid\, Welzijn en Sport",productie.coronamelder-dist.nl,Yes,2022-08-23T11:20:02,2022-12-04T11:20:02,productie.coronamelder-dist.nl,"CN=productie.coronamelder-dist.nl,O=Ministerie van Volksgezondheid\, Welzijn en Sport,L='s-Gravenhage,C=NL","CN=KPN PKIoverheid Server CA 2020,O=KPN B.V.,C=NL",productie.coronamelder-dist.nl,62.204.67.24,62.204.64.0/20,41887,"PROLOCATION Prolocation, NL",2000-06-22,2006-11-09,NL,ripencc
