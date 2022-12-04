@@ -35,7 +35,6 @@ applog.dtnr.nl
 apps.dictu.nl
 apps.haarlemmermeer.nl
 apps.kpnnetwerk.nl
-apps.ota-dpo.nl
 archibus-int-a.kpn.org
 archibus-int-p.kpn.org
 archisarchief.cultureelerfgoed.nl
@@ -88,7 +87,6 @@ connect-with.railov.nl
 connect-with.rocmensoalting.nl
 connect-with.rocmn.nl
 connect-with.rocva.nl
-console.dsh-dev.dsh.np.aws.kpn.com
 console.kpn-dsh.com
 console.poc.kpn-dsh.com
 console.rvp-azure-dsh.kpn-dsh.com
@@ -109,7 +107,6 @@ deelnemersportaal.mijnpmt.nl
 deelnemersportaal-mijnpmt-nl-a.mn-services.nl
 defmcd.mindef.nl
 demijnraad.nl
-dev-datadelen.mijnenergiedata.nl
 dgp2.procesinfrastructuur.nl
 digid.arnhem.nl
 digiinkoop.nl
@@ -128,8 +125,6 @@ dloket.twenterand.nl
 dmidoffice.dommeldam.nl
 dmo.omgevingswet.overheid.nl
 dms-prod.app.ns.nl
-docgen.dev-lab2019.buzaservices.nl
-docs.dsh-dev.dsh.np.aws.kpn.com
 docs.ndw.nu
 downloads.broservices.nl
 downloads.persberichten.rijksoverheid.nl
@@ -156,7 +151,6 @@ eh01.iwelcome.nl
 eherkenning.nl
 eh.onewelcome.nl
 eh.pre.onewelcome.nl
-eid.authenticatie.a1.ota.domain-registry.nl
 eid.authentication.sidn.nl
 elearning.platformrijksoverheid.nl
 elogintst.pensioenslagers.nl
@@ -327,11 +321,8 @@ mijn.wijkbijduurstede.nl
 mijnwijk.zwolle.nl
 mijnzaken.halderberge.nl
 mijnzaken.haltewerk.nl
-mobiel.ota-dpo.nl
 mobiel.sittard-geleen.nl
-mobile.ota-dpo.nl
 mobile.rijksdienstcn.com
-monitoring.dsh-dev.dsh.np.aws.kpn.com
 monitoring.dsh-prod.dsh.prod.aws.kpn.com
 monitoring.kpn-dsh.com
 monitoring.poc.kpn-dsh.com
@@ -342,7 +333,6 @@ mqtt.poc.kpn-dsh.com
 mqtt.rvp-azure-dsh.kpn-dsh.com
 mqtt.rvp.kpn-dsh.com
 mst.ctgb.nl
-mysites.dev-lab2019.buzaservices.nl
 n35wijthmennijverdal.nl
 nc.rivm.rijkscloud.nl
 netflix.kpn.com
@@ -353,7 +343,6 @@ npr3.idm.diginetwerk.net
 npr.kpncareportal.com
 nsrahp-t.ns.nl
 nwro.gemnet.nl
-office.dev-lab2019.buzaservices.nl
 office.wigo4it.nl
 offshorewind.rvo.nl
 oid.pkioverheid.nl
@@ -382,7 +371,6 @@ opendatavoorgemeenten.nl
 openoporde.nl
 opname.eindhoven.nl
 orderstatus.wmp-ct.kpn-wholesale.com
-ota.mijn.almere.nl
 ouderportaal.ggdlimburgnoord.nl
 outlook.renkum.nl
 outlook.svb.nl
@@ -411,9 +399,7 @@ portaal.digilevering.nl
 portaal.digimelding.nl
 portaal.heliomare.nl
 portaal-tst07.edsn.nl
-Portal.dev-lab2019.buzaservices.nl
 portal.omwb.nl
-portal.ota.kmcs.io
 portal.prd.kmcs.io
 portal.xeroxpensioenfondsen.nl
 Postbus.ggdghor.nl
@@ -444,7 +430,6 @@ registry.bsn-koppelregister.nl
 rekentool.eindhovenduurzaam.nl
 repos.hogeraad.nl
 repository0.prd.kmcs.io
-repository.ota.kmcs.io
 rijksafspraakplanner.nl
 rijkswaterstaatstrooit.nl
 rotterdam.subsidiedossier.nl
@@ -491,16 +476,13 @@ stadswinkel.roermond.nl
 statistiek.digid.nl
 statistiek.rijksoverheid.nl
 stelselcatalogus.nl
-sts.dev-lab2019.buzaservices.nl
 sts.maastricht.nl
-sts.ota-dpo.nl
 sts.rechtspraak.nl
 sts.woonzorg.nl
 subscribe.platformrijksoverheid.nl
 tableau.kpn.org
 talos.kpn.com
 tao.omgevingsloket.nl
-telewerken.ota-dpo.nl
 ticket.kpncareportal.com
 ticketreport.kpncareportal.com
 tmsgelb.nctv.minjenv.nl
@@ -508,7 +490,6 @@ toegankelijkheidsverklaring.nl
 toelatingen.ctgb.nl
 topdesk.app.wigo4it.nl
 topdesk.sp-cloudservices.nl
-tracing.dsh-dev.dsh.np.aws.kpn.com
 tracing.rvp-azure-dsh.kpn-dsh.com
 tracing.rvp.kpn-dsh.com
 tradeandinnovate.nl
@@ -540,7 +521,6 @@ vt-digid.ib-groep.nl
 vt-siam.duo.nl
 was.digid.nl
 webmail.hilversum.nl
-webmail.ota.spzl.nl
 webservices.acp.kvk.nl
 webservices.c-sam.nl
 webservices.kvk.nl
