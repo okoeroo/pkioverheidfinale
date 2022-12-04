@@ -13,7 +13,7 @@ def get_certificate(fqdn: str,
     cafile = "cacert.pem"
     
     if verbose:
-        print(f"Debug (get_certificate): {fqdn}:{port} - timeout:{timeout} - probing...", file=sys.stderr)
+        print(f"Debug (get_certificate): {fqdn}:{port} (with timeout {timeout}s) - probing...", file=sys.stderr)
 
     try:
         conn = ssl.create_connection((fqdn, port), timeout=timeout)
@@ -31,10 +31,10 @@ def get_certificate(fqdn: str,
         # Note: Not matching hostname on purpose
 
     except Exception as e:
-        print(f"TLS error for {fqdn}:{port} and timeout {timeout}: {e}", file=sys.stderr)
+        print(f"TLS error for {fqdn}:{port} (with timeout {timeout}): {e}", file=sys.stderr)
         return None
 
-    print(f"Debug (get_certificate): {fqdn}:{port} - timeout:{timeout} - success", file=sys.stderr)
+    print(f"Debug (get_certificate): {fqdn}:{port} (with timeout {timeout}s) - success", file=sys.stderr)
     return cert_pem
 
 
