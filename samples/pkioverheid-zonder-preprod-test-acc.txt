@@ -5,13 +5,10 @@ aaa.wigo4it.nl
 aanbieders.lerarenportfolio.nl
 aaninhetdonker.nl
 aanvraag-beheer.ciz.nl
-a-api.a-subscribe.platformrijksoverheid.nl
-ac.mijnoverheid.nl
 activesync.hetcak.nl
 admin-console.kpn-dsh.com
 admin-console.poc.kpn-dsh.com
 admin-console.rvp-azure-dsh.kpn-dsh.com
-a-downloads.persberichten.rijksoverheid.nl
 adviescommissiedbe.nl
 aeolus.ijsselstein.nl
 aeolus.montfoort.nl
@@ -112,7 +109,6 @@ deelnemersportaal.mijnpmt.nl
 deelnemersportaal-mijnpmt-nl-a.mn-services.nl
 defmcd.mindef.nl
 demijnraad.nl
-demo-geoservices.rijkswaterstaat.nl
 dev-datadelen.mijnenergiedata.nl
 dgp2.procesinfrastructuur.nl
 digid.arnhem.nl
@@ -131,7 +127,7 @@ dloket.roermond.nl
 dloket.twenterand.nl
 dmidoffice.dommeldam.nl
 dmo.omgevingswet.overheid.nl
-Dms-prod.app.ns.nl
+dms-prod.app.ns.nl
 docgen.dev-lab2019.buzaservices.nl
 docs.dsh-dev.dsh.np.aws.kpn.com
 docs.ndw.nu
@@ -518,8 +514,6 @@ tracing.rvp.kpn-dsh.com
 tradeandinnovate.nl
 tripleforms.nieuwegein.nl
 tripleformst.nieuwegein.nl
-tstmedmij-inlog.vzvz.nl
-tst.onkpn.com
 tunnel01.mindef.nl
 tunnel02.mindef.nl
 tvs.tetra.nl
@@ -652,10 +646,3 @@ zaalhuur.borne.nl
 zoekscholen.onderwijsinspectie.nl
 zwembaddieheygrave.nl
 
-
-OTAP omgevingen
----------------
-
-
-pre-productie.postex.munitax.nl
-pre.omgevingswet.overheid.nl
