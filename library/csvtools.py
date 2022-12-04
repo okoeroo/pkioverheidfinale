@@ -36,7 +36,8 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
         row['not_valid_before'] = f.cert.not_valid_before
         row['not_valid_after'] = f.cert.not_valid_after
         row['common_names'] = f.cert.common_names
-        row['san_dns_names'] = f.cert.san_dns_names.replace(",", ",\n")
+        row['san_dns_names'] = f.cert.san_dns_names
+#        row['san_dns_names'] = f.cert.san_dns_names.replace(",", ",\n")
 
         result = re.search('O=([\w\-_ \.\(\)&,\\\\]+),[a-zA-Z]+=', f.cert.subject_dn)
         if result is not None:
