@@ -32,10 +32,11 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
     if f.cert is not None:
         row['subject_dn'] = f.cert.subject_dn
         row['issuer_dn'] = f.cert.issuer_dn
+        row['is_expired'] = 'Yes' if f.cert.is_expired else 'No'
         row['not_valid_before'] = f.cert.not_valid_before
         row['not_valid_after'] = f.cert.not_valid_after
         row['common_names'] = f.cert.common_names
-        row['san_dns_names'] = f.cert.san_dns_names
+        row['san_dns_names'] = f.cert.san_dns_names.replace(",", ",\n")
 
         result = re.search('O=([\w\-_ \.\(\)&,\\\\]+),[a-zA-Z]+=', f.cert.subject_dn)
         if result is not None:
@@ -46,6 +47,7 @@ def generate_csv_row_dict(f: FqdnIpWhois) -> dict:
 def processor_convert_list_of_fqdnipwhois2csv(outputfilename: str, fqdns_with_dns: list[FqdnIpWhois]) -> None:
     with open(outputfilename, 'w') as csvfile:
         fieldnames = ['organisation', 'fqdn', 'ip', 'san_dns_names', 
+                        'is_expired',
                         'not_valid_before', 'not_valid_after',
                         # 'prefix',
                         'asn', 'asn_description', 
