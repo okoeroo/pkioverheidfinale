@@ -10,7 +10,7 @@ from library.csvtools import processor_convert_list_of_fqdnipwhois2csv
 
 
 ### Main
-if __name__ == '__main__':
+def main():
     # Parse arguments and quit if sanity checks fail
     args = argparsing()
     if not sanity_checks(args):
@@ -34,3 +34,6 @@ if __name__ == '__main__':
     # Write output to CSV file
     processor_convert_list_of_fqdnipwhois2csv(args.output_filename, fqdns_with_cert)
 
+
+if __name__ == '__main__':
+    main()
