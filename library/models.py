@@ -1,6 +1,6 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from cryptography import x509
-
+from datetime import datetime
 
 @dataclass
 class SimplifiedCertificate:
@@ -13,6 +13,12 @@ class SimplifiedCertificate:
     san_dns_names: str
     pem: str   
     certificate: x509.Certificate 
+    is_expired: bool | None = None
+
+    def __post_init__(self):
+        if datetime.now() > self.certificate.not_valid_after:
+            self.is_expired = True
+
 
 @dataclass
 class ASNDescription:
