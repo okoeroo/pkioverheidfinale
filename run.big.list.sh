@@ -12,10 +12,13 @@ if [ "$?" != 0 ]; then
 fi
 
 
-cat samples/pkioverheid.expanded-output.csv | head -n 1 > samples/pkioverheid.IN_scope.expanded-output.csv
+# Header
 cat samples/pkioverheid.expanded-output.csv | \
-        grep -i "pkioverheid" | \
-        grep -vi "private" \
+    head -n 1 > samples/pkioverheid.IN_scope.expanded-output.csv
+
+# Body
+cat samples/pkioverheid.expanded-output.csv | \
+    grep -i "PKIoverheid Server CA 2020" \
         >> samples/pkioverheid.IN_scope.expanded-output.csv
 
 
