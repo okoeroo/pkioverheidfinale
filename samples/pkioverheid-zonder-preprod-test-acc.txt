@@ -21,7 +21,6 @@ afspraak.nederweert.nl
 afspraken.almelo.nl
 afspraken.gemeente-oldambt.nl
 afspraken.tholen.nl
-aggregator.tst.etoegang.nl
 aimonline.nl
 antiddos.kpn.com
 api.kpn-dsh.com
@@ -77,7 +76,6 @@ cloudtunnel.rud-zeeland.nl
 cloudtunnel.terneuzen.nl
 cms.digid.nl
 coara.coa.nl
-condortst.coa.nl
 conf.hollandcasino.nl
 connect.ctgb.nl
 connect-with.horizoncollege.nl
@@ -153,7 +151,6 @@ eh.onewelcome.nl
 eh.pre.onewelcome.nl
 eid.authentication.sidn.nl
 elearning.platformrijksoverheid.nl
-elogintst.pensioenslagers.nl
 eloket.weert.nl
 e-maildiensten.rijksoverheid.nl
 emrmdm.ssc-i.nl
@@ -180,7 +177,6 @@ formulieren.odmh.nl
 forumstandaardisatie.nl
 freeler.email.kpn.com
 gateway.mobiel-werken.nl
-gateway-tst.edsn.nl
 gegevensdelen.mijn.overheid.nl
 geo.roermond.nl
 geoservices.cultureelerfgoed.nl
@@ -209,7 +205,6 @@ id.onderwijsgroeptilburg.nl
 idp.kvk.nl
 id.railov.nl
 id.rocva.nl
-idtst.railov.nl
 iene-prd.topdesk.odc-noord.nl
 image.mailing.rijksoverheid.nl
 immissietoets.nl
@@ -227,7 +222,6 @@ inr.omgevingsloket.nl
 installedbase.wmp-ct.kpn-wholesale.com
 intake.omgevingsloket.nl
 internet.veilig.kpn.com
-internet.veilig.tst.kpn.com
 internet.zorg-id.nl
 intranet.scp.nl
 intranetvan.rvo.nl
@@ -398,7 +392,6 @@ portaal.digikoppeling.nl
 portaal.digilevering.nl
 portaal.digimelding.nl
 portaal.heliomare.nl
-portaal-tst07.edsn.nl
 portal.omwb.nl
 portal.prd.kmcs.io
 portal.xeroxpensioenfondsen.nl
@@ -457,7 +450,6 @@ sharingknowledge.rvo.nl
 siam.bunnik.nl
 siam.duo.nl
 simplesamlidp.dictu.nl
-simulator.tst.etoegang.nl
 singleshop-pos.kpn.com
 singleshop.staging.kpn.com
 sip.dpo.mindef.nl
