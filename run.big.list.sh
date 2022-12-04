@@ -5,6 +5,8 @@
     -o samples/pkioverheid.expanded-output.csv \
     --dns 1.1.1.1,9.9.9.9
 
+#    --dns 127.0.0.1:8853
+
 
 if [ "$?" != 0 ]; then
     echo "failed"
