@@ -1,6 +1,8 @@
 import sys
-import dns.resolver
 from enum import Enum
+from dataclasses import dataclass
+import dns.resolver
+
 
 class DNSERRORS(Enum):
     NOERROR = 1,
@@ -8,6 +10,33 @@ class DNSERRORS(Enum):
     SERVFAIL = 3,
     TIMEOUT = 4,
     ERROR = 5
+
+
+# Very weird config interface, but this is what dnspython does:
+# only one port to be set, as the dict only allows for one dict.
+@dataclass
+class DnsPythonConfig:
+    raw: str
+    nameservers: list[str]
+    nameservers_port: dict
+
+
+def dns_parse_string_to_config(raw_ns_str: str) -> DnsPythonConfig:
+    if raw_ns_str is None:
+        raise ValueError("No nameservers provided")
+
+    # Split nameservers by comma, and only take the left side of a colon, if
+    # it exists
+    ns_elems = [ns.split(":")[0] for ns in raw_ns_str.split(",")]
+
+    # Split the nameserver by comma, and only for the elements with colon, add
+    # the nameserver and port key/value to the dict
+    ns_elems_dict = {}
+    for ns in raw_ns_str.split(","):
+        if ":" in ns:
+            ns_elems_dict[ns.split(":")[0]] = int(ns.split(":")[1])
+
+    return DnsPythonConfig(raw_ns_str, ns_elems, ns_elems_dict)
 
 
 def dns_query(fqdn: str, r_type: str,
@@ -20,23 +49,11 @@ def dns_query(fqdn: str, r_type: str,
     try:
         resolver = dns.resolver.Resolver()
 
-        if nameservers: 
-            ns_list = [nsp for nsp in nameservers.split(",")]
+        # Parse and construct config
+        dns_config = dns_parse_string_to_config(nameservers)
 
-            nameservers_filtered_list = [ns.split(":")[0] for ns in ns_list]
-            nameservers_filtered_list_dict = [{ns.split(":")[0]: ns.split(":")[1]} for ns in ns_list if ":" in ns]
-
-            # Set additional nameservers
-            if len(nameservers_filtered_list) == 1:
-                resolver.nameservers = nameservers_filtered_list[0]
-            else:
-                resolver.nameservers = nameservers_filtered_list
-
-            # If exists, add nameserver port mapping
-            # Limitation: due to an interface limitation, only one nameserver
-            # can have a different port
-            if nameservers_filtered_list_dict:
-                resolver.nameserver_ports = nameservers_filtered_list_dict[0]
+        resolver.nameservers = dns_config.nameservers
+        resolver.nameserver_ports = dns_config.nameservers_port
 
         # Query
         answers = resolver.query(fqdn, r_type)
