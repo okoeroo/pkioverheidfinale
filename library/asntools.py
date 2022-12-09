@@ -4,7 +4,7 @@ from library.dnstools import dns_query, DNSERRORS
 
 
 def fetch_asndescription(asn: int,
-                         nameservers: list[str] = None,
+                         nameservers: str = None,
                          verbose: bool = False) -> ASNDescription:
 
     fqdn = "AS" + str(asn) + ".asn.cymru.com"
@@ -31,7 +31,7 @@ def fetch_asndescription(asn: int,
 
 
 def fetch_ip2asn(ip: str,
-                 nameservers: list[str] = None,
+                 nameservers: str = None,
                  verbose: bool = False) -> ASN:
     ip_obj = ipaddress.ip_address(ip)
 

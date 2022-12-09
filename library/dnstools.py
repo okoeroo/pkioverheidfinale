@@ -11,7 +11,7 @@ class DNSERRORS(Enum):
 
 
 def dns_query(fqdn: str, r_type: str,
-                nameservers: list[str] = None,
+                nameservers: str = None,
                 verbose: bool = False) -> tuple[DNSERRORS, str]:
 
     if verbose:
@@ -19,9 +19,26 @@ def dns_query(fqdn: str, r_type: str,
 
     try:
         resolver = dns.resolver.Resolver()
-        if nameservers is not None:
-            resolver.nameservers=nameservers.split(",")
 
+        if nameservers: 
+            ns_list = [nsp for nsp in nameservers.split(",")]
+
+            nameservers_filtered_list = [ns.split(":")[0] for ns in ns_list]
+            nameservers_filtered_list_dict = [{ns.split(":")[0]: ns.split(":")[1]} for ns in ns_list if ":" in ns]
+
+            # Set additional nameservers
+            if len(nameservers_filtered_list) == 1:
+                resolver.nameservers = nameservers_filtered_list[0]
+            else:
+                resolver.nameservers = nameservers_filtered_list
+
+            # If exists, add nameserver port mapping
+            # Limitation: due to an interface limitation, only one nameserver
+            # can have a different port
+            if nameservers_filtered_list_dict:
+                resolver.nameserver_ports = nameservers_filtered_list_dict[0]
+
+        # Query
         answers = resolver.query(fqdn, r_type)
 
         if verbose:

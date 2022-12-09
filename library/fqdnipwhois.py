@@ -5,7 +5,7 @@ from library.ssltools import cert_start_probe
 
 
 def processor_fqdn2ip(fqdnipwhois: FqdnIpWhois,
-                        nameservers: list[str] = None,
+                        nameservers: str = None,
                         verbose: bool = False) -> FqdnIpWhois:
     status, answers = dns_query(fqdnipwhois.fqdn,
                                 'A', 
