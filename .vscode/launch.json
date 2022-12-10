@@ -14,8 +14,9 @@
             "args": ["-v", 
                         "--input-filename", "samples/pkishort.txt", 
                         "--output-filename", "samples/short.csv",
-                        "--dns", "8.8.8.8"]
-//                        "--dns", "127.0.0.1:8853"]
+                        "--dns", "127.0.0.1:8853"]
+//                        "--dns", "127.0.0.1:8853,8.8.8.8,1.1.1.1"]
+//                        "--dns", "8.8.8.8"]
         }
     ]
 }
