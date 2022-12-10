@@ -7,6 +7,7 @@ from library.cli import sanity_checks, argparsing
 from library.models import FqdnIpWhois
 from library.fqdnipwhois import processor_probe_certificates, processor_fqdn2ip
 from library.csvtools import processor_convert_list_of_fqdnipwhois2csv
+from library.dnstools import DnsPythonConfig
 
 
 ### Main
@@ -20,9 +21,12 @@ def main():
     with open(args.input_filename, "r") as f:
         fqdns = [FqdnIpWhois(fqdn.lower()) for fqdn in f.read().splitlines() if validators.domain(fqdn)]
 
+    # Parse and construct config for dnspython
+    dns_config = DnsPythonConfig(args.dns_servers)
+
     # DNS query the list, and add to the object list
     fqdns_with_dns = [processor_fqdn2ip(fqdn,
-                                        args.dns_servers, 
+                                        dns_config,
                                         args.verbose) for fqdn in fqdns]
 
     # Probe for certificates and expand the object list

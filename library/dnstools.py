@@ -1,6 +1,6 @@
 import sys
 from enum import Enum
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import dns.resolver
 
 
@@ -17,30 +17,36 @@ class DNSERRORS(Enum):
 @dataclass
 class DnsPythonConfig:
     raw: str
-    nameservers: list[str]
-    nameservers_port: dict
+    nameservers: list[str] = field(init=False)
+    nameservers_port: dict = field(init=False)
 
+    def split_raw_str_to_nameservers_list(self, raw_ns_str) -> list[str]:
+        # Split nameservers by comma, and only take the left side of a colon, if
+        # it exists
+        return [ns.split(":")[0] for ns in raw_ns_str.split(",")]
 
-def dns_parse_string_to_config(raw_ns_str: str) -> DnsPythonConfig:
-    if raw_ns_str is None:
-        raise ValueError("No nameservers provided")
+    def split_raw_str_to_nameserver_port_dict(self, raw_ns_str) -> dict:
+        # Split the nameserver by comma, and only for the elements with colon, add
+        # the nameserver and port key/value to the dict
+        ns_elems_dict = {}
+        for ns in raw_ns_str.split(","):
+            if ":" in ns:
+                ns_elems_dict[ns.split(":")[0]] = int(ns.split(":")[1])
 
-    # Split nameservers by comma, and only take the left side of a colon, if
-    # it exists
-    ns_elems = [ns.split(":")[0] for ns in raw_ns_str.split(",")]
+        return ns_elems_dict
 
-    # Split the nameserver by comma, and only for the elements with colon, add
-    # the nameserver and port key/value to the dict
-    ns_elems_dict = {}
-    for ns in raw_ns_str.split(","):
-        if ":" in ns:
-            ns_elems_dict[ns.split(":")[0]] = int(ns.split(":")[1])
+    def __post_init__(self):
+        raw_ns_str = self.raw
 
-    return DnsPythonConfig(raw_ns_str, ns_elems, ns_elems_dict)
+        if raw_ns_str is None:
+            raise ValueError("No nameservers provided")
 
+        self.nameservers = self.split_raw_str_to_nameservers_list(self.raw) 
+        self.nameservers_port = self.split_raw_str_to_nameserver_port_dict(self.raw)
+        
 
 def dns_query(fqdn: str, r_type: str,
-                nameservers: str = None,
+                dns_config: DnsPythonConfig,
                 verbose: bool = False) -> tuple[DNSERRORS, str]:
 
     if verbose:
@@ -48,9 +54,6 @@ def dns_query(fqdn: str, r_type: str,
 
     try:
         resolver = dns.resolver.Resolver()
-
-        # Parse and construct config
-        dns_config = dns_parse_string_to_config(nameservers)
 
         resolver.nameservers = dns_config.nameservers
         resolver.nameserver_ports = dns_config.nameservers_port

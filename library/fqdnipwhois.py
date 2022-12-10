@@ -2,14 +2,14 @@ from library.models import FqdnIpWhois
 from library.dnstools import dns_query, DNSERRORS
 from library.asntools import fetch_ip2asn
 from library.ssltools import cert_start_probe
-
+from library.dnstools import DnsPythonConfig
 
 def processor_fqdn2ip(fqdnipwhois: FqdnIpWhois,
-                        nameservers: str = None,
+                        dns_config: DnsPythonConfig,
                         verbose: bool = False) -> FqdnIpWhois:
     status, answers = dns_query(fqdnipwhois.fqdn,
                                 'A', 
-                                nameservers,
+                                dns_config,
                                 verbose)
     if status != DNSERRORS.NOERROR:
         return fqdnipwhois
@@ -24,7 +24,7 @@ def processor_fqdn2ip(fqdnipwhois: FqdnIpWhois,
     fqdnipwhois.ip_list = ip_list
 
     asn_info = fetch_ip2asn(fqdnipwhois.ip,
-                            nameservers,
+                            dns_config,
                             verbose)
     fqdnipwhois.asn = asn_info
 

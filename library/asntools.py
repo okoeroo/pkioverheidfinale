@@ -1,17 +1,17 @@
 import ipaddress
 from library.models import ASN, ASNDescription
-from library.dnstools import dns_query, DNSERRORS
+from library.dnstools import dns_query, DNSERRORS, DnsPythonConfig
 
 
 def fetch_asndescription(asn: int,
-                         nameservers: str = None,
+                         dns_config: DnsPythonConfig,
                          verbose: bool = False) -> ASNDescription:
 
     fqdn = "AS" + str(asn) + ".asn.cymru.com"
 
     status, answers = dns_query(fqdn,
                                 "TXT",
-                                nameservers,
+                                dns_config,
                                 verbose)
     if status != DNSERRORS.NOERROR:
         return None
@@ -31,7 +31,7 @@ def fetch_asndescription(asn: int,
 
 
 def fetch_ip2asn(ip: str,
-                 nameservers: str = None,
+                 dns_config: DnsPythonConfig,
                  verbose: bool = False) -> ASN:
     ip_obj = ipaddress.ip_address(ip)
 
@@ -39,7 +39,7 @@ def fetch_ip2asn(ip: str,
 
     status, answers = dns_query(fqdn,
                                 "TXT", 
-                                nameservers,
+                                dns_config,
                                 verbose)
     if status != DNSERRORS.NOERROR:
         return None
@@ -54,7 +54,7 @@ def fetch_ip2asn(ip: str,
 
     # Create ASN Description object
     asn_desc = fetch_asndescription(asn,
-                                    nameservers,
+                                    dns_config,
                                     verbose)
 
     # Create ASN object
