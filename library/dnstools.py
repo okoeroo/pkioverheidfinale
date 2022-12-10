@@ -2,6 +2,8 @@ import sys
 from enum import Enum
 from dataclasses import dataclass, field
 import dns.resolver
+import dns.asyncresolver
+
 
 
 class DNSERRORS(Enum):
@@ -43,7 +45,11 @@ class DnsPythonConfig:
 
         self.nameservers = self.split_raw_str_to_nameservers_list(self.raw) 
         self.nameservers_port = self.split_raw_str_to_nameserver_port_dict(self.raw)
-        
+    
+    def fetch_config_tuple(self):
+        for nameserver, port in self.nameservers_port.items():
+            return nameserver, port
+
 
 def dns_query(fqdn: str, r_type: str,
                 dns_config: DnsPythonConfig,
@@ -60,10 +66,56 @@ def dns_query(fqdn: str, r_type: str,
 
         # Query
         answers = resolver.query(fqdn, r_type)
+        rrset = [str(rr) for rr in answers]
 
         if verbose:
-            rrset = ",".join([str(rr) for rr in answers])
-            print(f"DNS query (verbose): FQDN={fqdn} RRtype={r_type} RRset={rrset}", file=sys.stderr)
+            rrset_str = ",".join(rrset)
+            print(f"DNS query (verbose): FQDN={fqdn} RRtype={r_type} RRset={rrset_str}", file=sys.stderr)
+
+        return DNSERRORS.NOERROR, answers
+
+
+    except dns.resolver.NXDOMAIN:
+        print(f"DNS query: warning=NXDOMAIN FQDN={fqdn} RRtype={r_type}", file=sys.stderr)
+        return DNSERRORS.NXDOMAIN, None
+
+    except dns.resolver.NoAnswer:
+        print(f"DNS query: warning=SERVFAIL FQDN={fqdn} RRtype={r_type}", file=sys.stderr)
+        return DNSERRORS.SERVFAIL, None
+
+    except dns.exception.Timeout:
+        print(f"DNS query: error=TIMEOUT FQDN={fqdn} RRtype={r_type}", file=sys.stderr)
+        return DNSERRORS.TIMEOUT, None
+
+    except EOFError:
+        print(f"DNS query: error=EOF FQDN={fqdn} RRtype={r_type}", file=sys.stderr)
+        return DNSERRORS.ERROR, None
+
+    except Exception as e:
+        print(f"DNS query: error='{e}' FQDN={fqdn} RRtype={r_type}", file=sys.stderr)
+        return DNSERRORS.ERROR, None
+
+
+async def a_dns_query(fqdn: str, r_type: str,
+                      dns_config: DnsPythonConfig,
+                      verbose: bool = False) -> tuple[DNSERRORS, str]:
+
+    if verbose:
+        print(f"DNS query (verbose): FQDN={fqdn} RRtype={r_type}", file=sys.stderr)
+
+    try:
+        resolver = dns.asyncresolver.Resolver()
+
+        resolver.nameservers = dns_config.nameservers
+        resolver.nameserver_ports = dns_config.nameservers_port
+
+        # Query
+        answers = await resolver.resolve(fqdn, r_type)
+        rrset = [str(rr) for rr in answers]
+
+        if verbose:
+            rrset_str = ",".join(rrset)
+            print(f"DNS query (verbose): FQDN={fqdn} RRtype={r_type} RRset={rrset_str}", file=sys.stderr)
 
         return DNSERRORS.NOERROR, answers
 
