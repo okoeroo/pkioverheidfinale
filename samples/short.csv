@@ -1,5 +1,5 @@
 organisation,fqdn,is_expired,not_valid_before,not_valid_after,san_dns_names,subject_dn,issuer_dn,common_names,ip,prefix,asn,asn_description,last_update_asn,last_update_asn_desc,country,registrar
+,aaa.wigo4it.nl,,,,,,,,80.113.84.147,80.113.0.0/17,33915,"TNF-AS, NL",2001-07-25,2004-09-06,NL,ripencc
 ,aanbieders.lerarenportfolio.nl,,,,,,,,FAILURE,,,,,,,
 ,productie.coronamelder-dist.nl,,,,,,,,FAILURE,,,,,,,
-,aaa.wigo4it.nl,No,2022-11-25T12:13:27,2023-02-23T12:13:26,aaa.wigo4it.nl,CN=aaa.wigo4it.nl,"CN=R3,O=Let's Encrypt,C=US",aaa.wigo4it.nl,80.113.84.147,80.113.0.0/17,33915,"TNF-AS, NL",2001-07-25,2004-09-06,NL,ripencc
 CAK,activesync.hetcak.nl,No,2022-11-08T11:01:58,2023-11-08T10:56:00,"activesync.hetcak.nl,webmail.hetcak.nl,autodiscover.hetcak.nl","CN=activesync.hetcak.nl,O=CAK,L='s-Gravenhage,ST=Zuid-Holland,C=NL","CN=QuoVadis Europe SSL CA G2,O=QuoVadis Trustlink B.V.,C=NL",activesync.hetcak.nl,185.125.41.7,185.125.40.0/22,203740,"CAK, NL",2015-11-06,2015-11-10,NL,ripencc
