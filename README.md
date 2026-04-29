@@ -10,17 +10,17 @@ The output contains the:
 - Registrar
 - Last update for the prefix
 - Last update for the ASN
-- Subject distinghuished name.
+- Subject distinguished name.
   - This is from the certificate found on port 443 using TLS, as with other certificate fields.
-- Issuer distinghuished name.
+- Issuer distinguished name.
 - Common Names
-  - Concattenated for the case when there are two CN fields.
+  - Concatenated for the case when there are two CN fields.
 - Subject Alternative Names, of the type DNS.
-  - Concattenated string.
+  - Concatenated string.
 - Not valid before time of the certificate.
 - Not valid after time of the certificate
 
-# Commandline options
+# Command-line options
 ```bash
 % ./main.py --help
 usage: cli.py [-h] [-v] [--parallel] [-i INPUT_FILENAME] [-o OUTPUT_FILENAME]
