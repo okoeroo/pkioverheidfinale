@@ -1,7 +1,9 @@
 # Domain to IP, Whois and certificate checker.
+
 The prime motivation to write this is to parse a list of hostnames (FQDNs) and create a CSV file as output to process the current state of these.
 
 The output contains the:
+
 - FQDN
 - IP address (first A record returned)
 - Prefix of the IP address in its AS
