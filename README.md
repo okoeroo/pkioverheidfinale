@@ -38,7 +38,7 @@ options:
 ```
 
 # Dependencies
-```
+```bash
 pip3 install validators
 pip3 install dnspython
 pip3 install cryptography
